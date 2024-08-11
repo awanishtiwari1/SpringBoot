@@ -11,7 +11,6 @@ import com.infy.exception.InsuranceException;
 import com.infy.model.PolicyDTO;
 
 
-@Repository
 public class InsuranceRepositoryImpl implements InsuranceRepository{
 
 

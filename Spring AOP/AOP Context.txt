@@ -1,0 +1,67 @@
+You know that enterprise applications are developed using multiple layers. While the functionalities of each layer is different, there are few functionalities which are common to all layers such as logging, security, transaction management, etc.  These functionalities are called as cross-cutting concerns. These are usually implemented in each layer separately but this makes the code more difficult to maintain as the code of cross-cutting concerns is tightly coupled with the business logic code of each layer. So, it is better to keep all of cross cutting concerns’ code in one place and use it in multiple places wherever required. This is where Aspect Oriented Programming (AOP) kicks in. It provides a way to separate the code of cross-cutting concern from business logic code and define them in one place so that it can be reused in all the layers of the application. 
+
+Advantages of AOP
+
+It ensures that cross cutting concerns are kept separate from the core business logic.
+
+It allows to create a more loosely coupled application wherein you can change the cross cutting concerns code without affecting the business code.
+
+Spring framework provides AOP support by default. But it leverages the use of AspectJ, which is one of the most popular AOP frameworks. AspectJ provides an easy way for implementing AOP with the help of annotations.
+
+In this course, you will use AspectJ annotations for AOP.
+
+
+
+
+Aspect is a class that implements the cross-cutting concerns. To declare a class as an aspect it should be annotated with the @Aspect annotation. It should be applied to the class which is annotated with @Component annotation or with derivatives of it.
+
+Join point is a specific point in the application such as method execution, exception handling, changing object variable values, etc during its execution. In Spring AOP a join point is always the execution of a method.
+
+Advice is a method of the aspect class that provides the implementation for the cross-cutting concern. It gets executed at the selected join point(s). The following table shows the different types of advice along with the execution point they have
+
+AOP Advice
+Type of Advice
+Execution Point
+Before	The advice gets executed before the join-point.
+After Returning    	The advice gets executed after the execution of the join-point finishes.
+After Throwing	The advice gets executed if any exception is thrown from the join-point.
+After (Finally)	The advice gets executed after the execution of the join-point whether it throws an exception or not.
+Around	The advice gets executed around the join-point, which means that it is invoked before the join-point and after the execution of the join-point.
+ 
+
+Pointcut represents an expression used to identify join points. It evaluates to the method name before or after which the advice needs to be executed.
+
+
+
+
+So far you have learnt that advice is a method which implements cross-cutting concern. But one question remains unanswered. How to tell which method of the bean advice needs to be executed? This is where pointcut expressions comes to the rescue. 
+
+It is used to determine exactly for which methods of Spring beans advice needs to be applied. It has the following syntax:
+
+execution(<modifiers> <return-type> <fully qualified class name>.<method-name>(parameters))
+where,
+
+execution is called as pointcut designator. It tells Spring that join point is the execution of the matching method.
+
+<modifiers> determines the access specifier of the matching method. It could either be public, protected, or private. It is not mandatory.
+
+<return-type> determines the return type of the method in order for a join point to be matched. It is mandatory. If the return type doesn't matter wildcard * is used.
+
+<fully qualified class name> specifies the fully qualified name of the class which has methods on the execution of which advice gets executed. It is optional. You can also use * wildcard as name or part of a name.
+
+<method-name> specifies the name of the method on the execution of which advice gets executed. It is mandatory. You can also use * wildcard as name or part of a name.
+
+parameters are used for matching parameters. To skip parameter filtering, use two dots .. as parameters.
+
+The following are some examples of pointcut expressions:
+
+AOP Pointcut
+Pointcut
+Description
+execution(public * *(..))	execution of any public method
+execution(* service*(..))	execution of any method with a name beginning with “service”
+execution(* com.infy.service.*.*(..))	execution of any method defined in the com.infy.service package
+execution(* com.infy.service.CustomerServiceImpl.*(..))	execution of any method defined in CustomerServiceImpl of com.infy.service package
+execution(public * com.infy.repository.CustomerRepository.*(..))                                       	execution of any public method in CustomerRepository of com.infy.repository package
+execution(public String com.infy.repository.CustomerRepository.*(..))	execution of all public method in CustomerRepository of com.infy.repository package that returns a String
+ 

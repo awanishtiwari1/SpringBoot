@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.Environment;
@@ -17,7 +18,7 @@ import com.infy.model.PolicyReportDTO;
 import com.infy.service.InsuranceServiceImpl;
 
 
-@Controller
+@SpringBootApplication
 public class UserInterface {
 	
 	public static final Log LOGGER = LogFactory.getLog(UserInterface.class); 

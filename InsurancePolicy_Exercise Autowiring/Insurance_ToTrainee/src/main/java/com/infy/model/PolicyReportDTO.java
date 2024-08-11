@@ -31,6 +31,9 @@ public class PolicyReportDTO {
 	public void setTenureInMonths(Integer tenureInMonths) {
 		this.tenureInMonths = tenureInMonths;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "PolicyReportDTO [policyNumber=" + policyNumber + ", policyHolderName=" + policyHolderName
