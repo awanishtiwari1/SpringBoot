@@ -11,18 +11,12 @@ import com.infy.repository.InsuranceRepository;
 
 public class Validator {
 
-	@Autowired
-	static
-	InsuranceRepository insuranceRepository;
+	
 	public static void validate(PolicyDTO policy) throws InsuranceException{
-//		List<PolicyDTO> allPolicies = insuranceRepository.getAllPolicyDetails();
-//		for(PolicyDTO list : allPolicies)
-//		{
-//			if(list.getPolicyNumber() == policy.getPolicyNumber())
-//			{
-//				
-//			}
-//		}
+		if(!validatePolicyName(policy.getPolicyName()))
+		{
+			throw new InsuranceException("Validator.INVALID_POLICY_NUMBER");
+		}
 		
 	}
 
